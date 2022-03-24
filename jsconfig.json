@@ -3,6 +3,8 @@
         "baseUrl": "src",
         "paths": {
             "@styles/*": ["styles/*"],
+            "common/*": ["common/*"],
+            "components/*": ["components/*"],
         }
     }
 }
