@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { useAuth } from '@hooks/useAuth';
 
@@ -8,6 +9,7 @@ export default function LoginPage() {
   const auth = useAuth();
   const [errorLogin, setErrorLogin] = useState(null);
   const [loading, setLoading] = useState(null);
+  const router = useRouter();
 
   const submiHandle = (event) => {
     event.preventDefault();
@@ -19,7 +21,7 @@ export default function LoginPage() {
     auth
       .signin(email, password)
       .then(() => {
-        console.log('signin success');
+        router.push('/dashboard');
       })
       .catch((error) => {
         if (error.response?.status === 401) {
