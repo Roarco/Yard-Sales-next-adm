@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { ProductSchema } from '@schemas/ProductSchema';
+import { addProduct } from '@services/api/product';
 
 export default function FormProduct() {
   const formRef = useRef(null);
@@ -18,7 +19,9 @@ export default function FormProduct() {
     const validation = await ProductSchema.validate(data);
 
     if (validation) {
-      console.log(validation);
+      addProduct(data).then((response) => {
+        console.log(response);
+      });
     }
   };
 
