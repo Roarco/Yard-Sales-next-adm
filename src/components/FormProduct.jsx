@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { useForm } from 'react-hook-form';
 import { ProductSchema } from '@schemas/ProductSchema';
 import { addProduct } from '@services/api/product';
 
