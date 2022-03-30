@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { ProductSchema } from '@schemas/ProductSchema';
 import { addProduct } from '@services/api/product';
 
-export default function FormProduct() {
+export default function FormProduct({ setOpen, setAlert }) {
   const formRef = useRef(null);
 
   const handleSubmit = async (event) => {
@@ -18,9 +18,24 @@ export default function FormProduct() {
     const validation = await ProductSchema.validate(data);
 
     if (validation) {
-      addProduct(data).then((response) => {
-        console.log(response);
-      });
+      addProduct(data)
+        .then(() => {
+          setAlert({
+            active: true,
+            message: 'Product added successfully',
+            type: 'success',
+            autoClose: false,
+          });
+          setOpen(false);
+        })
+        .catch((error) => {
+          setAlert({
+            active: true,
+            message: error.message,
+            type: 'error',
+            autoClose: false,
+          });
+        });
     }
   };
 
