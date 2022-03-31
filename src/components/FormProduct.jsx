@@ -2,9 +2,8 @@ import { useRef } from 'react';
 import { ProductSchema } from '@schemas/ProductSchema';
 import { addProduct } from '@services/api/product';
 
-export default function FormProduct({ setOpen, setAlert }) {
+export default function FormProduct({ setOpen, setAlert, product }) {
   const formRef = useRef(null);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(formRef.current);
@@ -49,6 +48,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                 Title
               </label>
               <input
+                defaultValue={product?.title}
                 type="text"
                 name="title"
                 id="title"
@@ -63,6 +63,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                 Price
               </label>
               <input
+                defaultValue={product?.price}
                 type="number"
                 name="price"
                 id="price"
@@ -77,6 +78,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                 Category
               </label>
               <select
+                defaultValue={product?.category}
                 id="category"
                 name="category"
                 autoComplete="category-name"
@@ -96,6 +98,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                 Description
               </label>
               <textarea
+                defaultValue={product?.description}
                 name="description"
                 id="description"
                 autoComplete="description"
@@ -125,7 +128,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                         className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                       >
                         <span>Upload a file</span>
-                        <input id="images" name="images" type="file" className="sr-only" required />
+                        <input defaultValue={product?.images} id="images" name="images" type="file" className="sr-only" required />
                       </label>
                       <p className="pl-1">or drag and drop</p>
                     </div>
